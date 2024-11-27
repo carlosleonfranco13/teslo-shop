@@ -2,9 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// prisma/schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Size {
@@ -22,6 +25,11 @@ enum Gender {
   women
   kid
   unisex
+}
+
+enum Role {
+  admin
+  user
 }
 
 model Category {
@@ -56,4 +64,14 @@ model ProductImage {
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  password      String 
+  role          Role      @default(user)
+  image         String?
 }

@@ -1,15 +1,17 @@
-version: '4.34.3'
-
+version: '3.8'
 
 services:
+
   postgres-db:
-    image: postgres:15
+    image: postgres:15.3
     restart: always
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - /var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - 5433:5432
+volumes:
+  postgres_data:

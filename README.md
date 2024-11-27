@@ -42,10 +42,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 1. Clonar el repositorio
 2. Crear una copia del ```.env.template``` y renombrar a ```.env``` y cambiar las variables de entorno
 3. Instalar dependencias ```npm install```
-4. Levantar la DB ```docker compose up -d```
+4. Levantar la DB en Neon.tech y seguir los pasos y Copiar los 'Parameters Only' de Neon a TablePlus
 5. Correr las migraciones de Prisma ```npx prisma migrate dev```
 6. Ejecutar seed ```npm run seed```
-6. Correr el proyecto ```npm run dev```
+7. Correr el proyecto ```npm run dev```
 
 
 ## Correr en Prod
