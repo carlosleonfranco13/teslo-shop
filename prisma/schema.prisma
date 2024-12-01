@@ -71,7 +71,12 @@ model User {
   name          String
   email         String    @unique
   emailVerified DateTime?
-  password      String 
+  password      String
   role          Role      @default(user)
   image         String?
+}
+
+model Country {
+  id   String @id
+  name String
 }
