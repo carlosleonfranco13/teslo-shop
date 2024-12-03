@@ -55,6 +55,25 @@ export const placeOrder = async (productIds: ProductToOrder[], address: Address)
     }, {subTotal:0, tax:0, total:0})
 
     // Crear la transacción de Base de Datos
+    const prismaTx = await prisma.$transaction(async(tx) => {
 
+        // 1. Actualizar el Stock de los productos
+
+
+        // 2. Crear la orden - Encabezado - Detalles
+
+
+
+        // 3. Crear la dirección de la orden
+
+
+
+        return {
+            
+        }
+
+
+
+    })
 
 }
