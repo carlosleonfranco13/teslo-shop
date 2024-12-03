@@ -80,18 +80,28 @@ export const placeOrder = async (productIds: ProductToOrder[], address: Address)
                     }
                 }
             }
-        })
+        });
+
+        // Validar, si el precio es 0, entonces, lanzar un error.
 
 
 
         // 3. Crear la dirección de la orden
+        const {country, ...restAddress} = address;
+        const orderAddress = await tx.orderAddress.create({
+            data: {
+                ...restAddress,
+                countryId: country,
+                orderId: order.id,
+            }
+        })
 
 
 
         return {
-            order: order,
             updatedProducts: [],
-            orderAddress: {}
+            order: order,
+            orderAddress: orderAddress,
         }
 
 
