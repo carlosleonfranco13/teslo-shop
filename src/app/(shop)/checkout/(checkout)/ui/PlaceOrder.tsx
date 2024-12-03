@@ -1,5 +1,6 @@
 'use client'
 
+import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import clsx from "clsx";
@@ -38,6 +39,8 @@ export const PlaceOrder = () => {
 
 
         // TODO: Server Action
+        const resp = await placeOrder( productsToOrder, address);
+        console.log({resp});
 
 
         setIsPlacingOrder(false);
