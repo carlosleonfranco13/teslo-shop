@@ -4,13 +4,16 @@ import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
 
 
 export const PlaceOrder = () => {
 
+    const router = useRouter();
     const [loaded, setLoaded] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
 
@@ -19,6 +22,8 @@ export const PlaceOrder = () => {
     const { itemsInCart, subTotal, tax, total } = useCartStore(useShallow(state => state.getSummaryInformation()))
 
     const cart = useCartStore(state => state.cart);
+    const clearCart = useCartStore(state => state.clearCart);
+
 
 
     useEffect(() => {
@@ -35,15 +40,20 @@ export const PlaceOrder = () => {
             size: product.size, 
         }))
 
-        console.log({address, productsToOrder})
 
 
-        // TODO: Server Action
+        // Server Action
         const resp = await placeOrder( productsToOrder, address);
-        console.log({resp});
+        if(!resp.ok) {
+            setIsPlacingOrder(false);
+            setErrorMessage(resp.message);
+            return;
+        }
 
+        // Todo sale bien
+        clearCart();
+        router.replace('/orders/' + resp.order?.id)
 
-        setIsPlacingOrder(false);
     }
 
     if (!loaded) {
@@ -95,9 +105,9 @@ export const PlaceOrder = () => {
                     </span>
                 </p>
 
-                {/* <p className="text-red-500">Error de Creación</p> */}
+                <p className="text-red-500">{errorMessage}</p>
 
-                <button
+                <button 
                     // href="/orders/123"
                     onClick={onPlaceOrder}
                     className={
