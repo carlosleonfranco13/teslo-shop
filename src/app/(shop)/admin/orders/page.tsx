@@ -1,7 +1,7 @@
 export const revalidate = 0;
 
 import { getPaginatedOrders } from '@/actions';
-import { Title } from '@/components';
+import { Pagination, Title } from '@/components';
 
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -74,6 +74,8 @@ export default async function OrdersPage() {
 
                     </tbody>
                 </table>
+
+                <Pagination totalPages={3} />
             </div>
         </>
     );
