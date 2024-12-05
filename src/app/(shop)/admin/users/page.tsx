@@ -21,7 +21,7 @@ export default async function OrdersPage() {
             <div className="mb-10">
                 <UsersTable users={users}/>
 
-                <Pagination totalPages={3}/>
+                <Pagination totalPages={1}/>
             </div>
         </>
     );
