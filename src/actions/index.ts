@@ -10,6 +10,8 @@ export * from './auth/login'
 export * from './auth/logout'
 export * from './auth/register'
 
+export * from './category/get-categories'
+
 export * from './country/get-countries'
 
 export * from './order/place-order'
