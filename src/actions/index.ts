@@ -22,6 +22,7 @@ export * from './order/get-orders-by-user'
 export * from './payments/set-transaction-id'
 export * from './payments/paypal-check-payment'
 
+export * from './product/delete-product-image'
 export * from './product/create-update-product'
 export * from './product/get-product-by-slug'
 export * from './product/get-stock-by-slug'
