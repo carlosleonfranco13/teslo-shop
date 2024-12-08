@@ -82,7 +82,17 @@ export const createUpdateProduct = async (formData: FormData) => {
             // Recorrer la imgs y guardarlas
             if (formData.getAll('images')) {
                 const images = await uploadImages(formData.getAll('images') as File[]);
-                console.log(images);
+                if ( !images ) {
+                    throw new Error('No se pudo cargar las imagenes, RollingBack')
+                }
+
+                await prisma.productImage.createMany({
+                    data:images.map( image => ({
+                        url: image!,
+                        productId: product.id,
+                    }))
+                })
+
             }
 
             return {
